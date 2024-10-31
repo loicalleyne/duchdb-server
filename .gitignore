@@ -1,4 +1,4 @@
-.sh
-.work
+*.sh
+*.work
 .chdb_data/*
 vendor/*
