@@ -1,8 +1,8 @@
 # 🦆🏠 Du*ch*DB Server
 
-This project is a Go-based web server that integrates with both [chDB-go](https://github.com/chdb-io/chdb-go) and [duckdb](https://github.com/duckdb/duckdb) (using the `duckdb httpserver` extension), providing a web interface for executing database queries, and an API to interact with the databases programmatically. It embeds the static file `play.html` directly within the binary for easy distribution and deployment.
+This project is a Go-based web server that integrates with both [chDB-go](https://github.com/chdb-io/chdb-go) and [duckdb](https://github.com/duckdb/duckdb), providing a web interface for executing database queries, and an API to interact with the databases programmatically. It embeds the static file `play.html` directly within the binary for easy distribution and deployment.
 
-![chDB Server](doc/demo.png)
+![duchDB Server](doc/demo.png)
 
 ## Features
 
@@ -20,7 +20,7 @@ Before you start, ensure you have the following installed:
 curl -sL https://lib.chdb.io | bash
 ```
 
-## Installation
+## 🚀 Install
 
 1. Go Install
 
@@ -41,7 +41,8 @@ You can configure the server by setting the following environment variables befo
 
 - DATA_PATH: Specifies the directory path for CHDB session data. Defaults to .chdb_data if not set.
 - DUCK_PATH: Specifies the directory path for CHDB session data. Defaults to .duckdb_data/duck.db if not set.
-## Usage
+
+## 💡 Usage
 
 
 Open your browser and navigate to `http://localhost:9998` to start querying chdb and `http://localhost:9999` to query duckdb.
@@ -66,3 +67,6 @@ SELECT RegionID, SUM(AdvEngineID), COUNT(*) AS c, AVG(ResolutionWidth), COUNT(DI
                         FROM url('https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_0.parquet') GROUP BY RegionID ORDER BY c DESC LIMIT 10
 ```
 
+## 💫 Show your support
+
+Give a ⭐️ if this project helped you!
