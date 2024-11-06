@@ -31,11 +31,7 @@ func initDuckDB(dbPath string) error {
 	var err error
 	var db string
 	if dbPath != "" {
-		if !*ro {
-			db = dbPath + "?threads=4"
-		} else {
-			db = dbPath + "?access_mode=read_only&threads=4"
-		}
+		db = dbPath + "?access_mode=read_only&threads=4"
 	}
 	connector, err := duckdb.NewConnector(db, func(execer driver.ExecerContext) error {
 		bootQueries := []string{
@@ -91,7 +87,7 @@ func runHTTP(authString string, mux *http.ServeMux) {
 		log.Fatal(err)
 		return
 	}
-
+	go schemasTTL()
 	log.Printf("🦆🏠 DuchDB HTTP Server started - duckdb file: %v - auth type: %v ", duckPath, *authType)
 	log.Printf("Listening on :\n\tchdb - http://localhost:%d\n\tduckdb - http://localhost:%d\n", *chPort, *port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", *chPort), mux))

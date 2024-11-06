@@ -38,6 +38,13 @@ func main() {
 		// Register specific handlers
 		mux.HandleFunc("/play", s.tokenAuth(s.handlePlay))
 		mux.HandleFunc("/ping", s.tokenAuth(s.handlePing))
+		mux.HandleFunc("/schema", s.tokenAuth(func(w http.ResponseWriter, r *http.Request) {
+			if r.Method == http.MethodPost {
+				s.handleSchemaPost(w, r)
+				return
+			}
+			s.handleSchemaGet(w, r)
+		}))
 
 		// Catch-all handler: place this last
 		mux.HandleFunc("/", s.tokenAuth(func(w http.ResponseWriter, r *http.Request) {
@@ -63,6 +70,13 @@ func main() {
 		// Register specific handlers
 		mux.HandleFunc("/play", s.basicAuth(s.handlePlay))
 		mux.HandleFunc("/ping", s.basicAuth(s.handlePing))
+		mux.HandleFunc("/schema", s.basicAuth(func(w http.ResponseWriter, r *http.Request) {
+			if r.Method == http.MethodPost {
+				s.handleSchemaPost(w, r)
+				return
+			}
+			s.handleSchemaGet(w, r)
+		}))
 
 		// Catch-all handler: place this last
 		mux.HandleFunc("/", s.basicAuth(func(w http.ResponseWriter, r *http.Request) {
